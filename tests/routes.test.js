@@ -12,7 +12,7 @@ describe('get user endpoint', () => {
 
 describe('get user endpoint with wrong ID', () => {
     it('Should get a user', async () => {
-        const res = await request(app).get('/user/abc')
+        const res = await request(app).get('/user/whatever')
         expect(res.statusCode).toEqual(400)
     })
 })
