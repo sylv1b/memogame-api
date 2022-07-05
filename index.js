@@ -31,4 +31,9 @@ app.use("/game", game);
 
 const port = process.env.PORT || 5001;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+// app.listen(port, () => console.log(`Server running on port ${port}`));
+var server = app.listen(port, function () {
+    //console.log(`App listening on port ${port}`)
+})
+
+module.exports = server

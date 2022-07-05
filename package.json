@@ -4,7 +4,8 @@
   "description": "A small backend to save user name and user scores",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "test:watch": "npm run test -- --watch",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
@@ -17,6 +18,15 @@
     "mongoose": "^6.4.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.18"
+    "cross-env": "^7.0.3",
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.18",
+    "supertest": "^6.2.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

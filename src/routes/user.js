@@ -4,8 +4,6 @@ const router = express.Router();
 
 const User = require('../models/user')
 
-
-
 // GET /user/userId
 // public
 // create a new user
@@ -13,7 +11,7 @@ router.get('/:userId', async (req, res) => {
     const { userId } = req.params
     if (!userId || userId === '') return res.status(400).json('Please enter a user name')
 
-    return User.findById(mongoose.Types.ObjectId(userId))
+    return User.findById(userId)
         .then((user) => res.json(user))
         .catch(err => res.status(400).json(err))
 })
