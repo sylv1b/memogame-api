@@ -29,9 +29,6 @@ app.get('/', function (req, res) {
 app.use("/user", user);
 app.use("/game", game);
 
-var server = app.listen(5001, function () {
-    var host = server.address().address
-    var port = server.address().port
+const port = process.env.PORT || 5001;
 
-    console.log("Example app listening at http://%s:%s", host, port)
-})
+app.listen(port, () => console.log(`Server running on port ${port}`));
