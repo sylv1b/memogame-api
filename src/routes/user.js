@@ -4,9 +4,19 @@ const router = express.Router();
 
 const User = require('../models/user')
 
-// GET /user/userId
-// public
-// create a new user
+/** 
+ * @swagger 
+ * /user/:userId: 
+ *   get: 
+ *     summary: Get user by userId
+ *     description: Get user with userId 
+ *     responses:  
+ *       200: 
+ *         description: A user
+ *       400:
+ *         description: Error
+ *   
+ */
 router.get('/:userId', async (req, res) => {
     const { userId } = req.params
     if (!userId || userId === '') return res.status(400).json('Please enter a user name')
@@ -16,9 +26,27 @@ router.get('/:userId', async (req, res) => {
         .catch(err => res.status(400).json(err))
 })
 
-// POST /user
-// public
-// create a new user
+/** 
+ * @swagger 
+ * /game: 
+ *   post:
+ *     requestBody:
+ *       required: true
+ *       content:
+ *          application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              user:
+ *                type: string
+ *             required:
+ *               - user
+ *     responses:  
+ *       200: 
+ *         description: The user
+ *       400:
+ *         description: Error 
+ */
 router.post('/', async (req, res) => {
     const { user } = req.body
     if (!user || user === '') return res.status(400).json('Please enter a user name')

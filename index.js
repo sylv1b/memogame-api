@@ -1,7 +1,9 @@
-var express = require('express');
-let cors = require("cors");
-var app = express();
+const express = require('express');
+const cors = require("cors");
+const app = express();
 const mongoose = require("mongoose");
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
 app.use(cors());
 app.options('*', cors());
@@ -22,9 +24,22 @@ mongoose
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log(err));
 
-app.get('/', function (req, res) {
-    res.send('Welcome to MGA (aka memo game api)');
-})
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+        title: 'Express API for JSONPlaceholder',
+        version: '1.0.0',
+    },
+};
+
+const options = {
+    swaggerDefinition,
+    // Paths to files containing OpenAPI definitions
+    apis: ['./src/routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use("/user", user);
 app.use("/game", game);
